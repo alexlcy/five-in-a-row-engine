@@ -127,7 +127,7 @@ def check_for_win(mat):
                     return 1
                 if diag == target2:
                     return -1
-            if j - 5 >= 0 and i + 5 <= n:
+            if j - 4 >= 0 and i + 5 <= n:
                 diag = [mat[i+x][j-y] for x in range(5) for y in range(5) if x == y]
                 if diag == target1:
                     return 1
