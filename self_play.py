@@ -58,8 +58,8 @@ def self_play(M = 8):
         print(len(master_move))
 
         if len(master_move) > file_length + 50:
-            master_mat_save = np.append(master_mat)
-            master_move_save = np.append(master_move)
+            master_mat_save = np.array(master_mat)
+            master_move_save = np.array(master_move)
             time_diff = time.time() - start_time
             print(f"Saving file for {len(master_move)} steps now. Time Spent :{time_diff}. Rate: {time_diff/len(master_move)}")
 
