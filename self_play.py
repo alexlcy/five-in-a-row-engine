@@ -57,14 +57,14 @@ def self_play(M = 8):
         print(f'Done for one game with {step_num} moves.Time Spent :{time_diff}.Rate: {time_diff/len(master_move)}')
         print(len(master_move))
 
-        if len(master_move) > file_length + 100:
-            master_mat = np.concatenate(master_mat)
-            master_move = np.concatenate(master_move)
+        if len(master_move) > file_length + 50:
+            master_mat_save = np.append(master_mat)
+            master_move_save = np.append(master_move)
             time_diff = time.time() - start_time
             print(f"Saving file for {len(master_move)} steps now. Time Spent :{time_diff}. Rate: {time_diff/len(master_move)}")
 
-            np.save(f"game_data/master_mat_{date_string}.npy", master_mat)
-            np.save(f"game_data/master_move_{date_string}.npy", master_move)
+            np.save(f"game_data/master_mat_{date_string}.npy", master_mat_save)
+            np.save(f"game_data/master_move_{date_string}.npy", master_move_save)
             file_length = len(master_move)
 
     #         if debug == True:
