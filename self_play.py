@@ -13,21 +13,18 @@ def self_play(M = 8):
     print("self play started")
     date_string = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
     start_time = time.time()
-    mat = np.zeros((M, M))
-    cur_move = None
-    cur_player = 1
     file_length = 0
     debug = True
     master_mat = []
     master_move = []
 
+    # Intialized the agent
     bot_white = MCTSAgent(simulation_number=SIMULATION_NUMBER,
                           temperature=TEMPERATURE,
                           cur_player=1)
     bot_black = MCTSAgent(simulation_number=SIMULATION_NUMBER,
                           temperature=TEMPERATURE,
                           cur_player=-1)
-
     player_bot_dict = {1: bot_white, -1: bot_black}
 
     # if debug == True:
@@ -38,6 +35,9 @@ def self_play(M = 8):
 
     while True:
         step_num = 0
+        mat = np.zeros((M, M))
+        cur_move = None
+        cur_player = 1
         while check_for_done(mat)[0] is False:
             # if debug == True and pygame.event.get() is not None:
             #     render(screen, mat)
@@ -52,6 +52,7 @@ def self_play(M = 8):
             master_move.append(encoder.encode_point(cur_move))
             cur_player *= -1
             step_num +=1
+
         time_diff = time.time() - start_time
         print(f'Done for one game with {step_num} moves.Time Spent :{time_diff}.Rate: {time_diff/len(master_move)}')
         print(len(master_move))
@@ -59,7 +60,6 @@ def self_play(M = 8):
         if len(master_move) > file_length + 100:
             master_mat = np.concatenate(master_mat)
             master_move = np.concatenate(master_move)
-
             time_diff = time.time() - start_time
             print(f"Saving file for {len(master_move)} steps now. Time Spent :{time_diff}. Rate: {time_diff/len(master_move)}")
 
