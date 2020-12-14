@@ -6,10 +6,10 @@ Created on Wed Dec 18 20:36:53 2019
 @author: root
 """
 import pygame
+from numba import jit
 
 M=8
 import numpy as np
-import pdb
 
 def update_by_man(event, mat):
     """
@@ -41,11 +41,12 @@ def draw_board(screen):
     global M
     d=int(560/(M-1))
     black_color = [0, 0, 0]
-    board_color = [ 241, 196, 15 ]
+    board_color = [241, 196, 15]
     screen.fill(board_color)
     for h in range(0, M):
         pygame.draw.line(screen, black_color,[40, h * d+40], [600, 40+h * d], 1)
         pygame.draw.line(screen, black_color, [40+d*h, 40], [40+d*h, 600], 1)
+
 def draw_stone(screen, mat):
     """
     This functions draws the stones according to the mat. It draws a black circle for matrix element 1(human),
@@ -84,6 +85,7 @@ def render(screen, mat):
     draw_stone(screen, mat)
     pygame.display.update()
 
+
 def check_for_done(mat):
     """
     please write your own code testing if the game is over. Return a boolean variable done. If one of the players wins
@@ -93,43 +95,70 @@ def check_for_done(mat):
     output:
         none
     """
-    result = check_for_win(mat)
-    if result:
-        return True, result
-    else:
-        if len(np.where(mat==0)[0]) == 0:
-            return True, 0.5
-        else:
-            return False, 0
+    m, n = mat.shape
+    target1 = [1, 1, 1, 1, 1]
+    target2 = [-1, -1, -1, -1, -1]
+    if len(np.where(mat == 0)[0]) == 0:
+        return True, 0.5
 
-
-def check_for_win(mat):
-    m,n = mat.shape
-    target1 = [1,1,1,1,1]
-    target2 = [-1,-1,-1,-1,-1]
     for i in range(m):
         for j in range(n):
             if j + 5 <= m:
-                sideway = mat[i][j:j+5]
+                sideway = mat[i][j:j + 5]
                 if (sideway == target1).all():
-                    return 1
+                    return True, 1
                 if (sideway == target2).all():
-                    return -1
+                    return True, -1
             if i + 5 <= m:
-                vert =mat[:,j][i:i+5]
+                vert = mat[:, j][i:i + 5]
                 if (vert == target1).all():
-                    return 1
+                    return True, 1
                 if (vert == target2).all():
-                    return -1
+                    return True, -1
             if j + 5 <= m and i + 5 <= n:
-                diag = [mat[i+x][j+y] for x in range(5) for y in range(5) if x == y]
+                diag = [mat[i + x][j + y] for x in range(5) for y in range(5) if x == y]
                 if diag == target1:
-                    return 1
+                    return True, 1
                 if diag == target2:
-                    return -1
+                    return True, -1
             if j - 4 >= 0 and i + 5 <= n:
-                diag = [mat[i+x][j-y] for x in range(5) for y in range(5) if x == y]
+                diag = [mat[i + x][j - y] for x in range(5) for y in range(5) if x == y]
                 if diag == target1:
-                    return 1
+                    return True, 1
                 if diag == target2:
-                    return -1
+                    return True, -1
+    return False, 0
+
+@jit(nopython=True)
+def check_for_win(mat, move):
+    n = mat.shape[0]
+    i = move[0]
+    j = move[1]
+    player = mat[i][j]
+
+    if len(np.where(mat==0)[0]) == 0:
+        return 0
+
+    offset = {'h': (0, 1), 'v': (1, 0), 'd': (1, 1), 'ad': (-1, 1)}
+    for os in offset.values():
+        i1 = i + os[0]
+        j1 = j + os[1]
+        i2 = i + -os[0]
+        j2 = j + -os[1]
+        counting = 1
+        while i1 >= 0 and j1 >= 0 and i1 < n and j1 < n:
+            if mat[i1][j1] == player:
+                counting += 1
+                i1 += os[0]
+                j1 += os[1]
+            else:
+                break
+        while i2 >= 0 and j2 >= 0 and i2 < n and j2 < n:
+            if mat[i2][j2] == player:
+                counting += 1
+                i2 -= os[0]
+                j2 -= os[1]
+            else:
+                break
+        if counting >= 5:
+            return player

@@ -10,7 +10,7 @@ import random
 import time
 import numpy as np
 from gameengine import place_intelligently
-from fiveinarow import check_for_done, check_for_win
+from fiveinarow import check_for_win
 
 exploration_param = np.sqrt(2)
 mcts_root = None
@@ -62,7 +62,6 @@ def expand(node):
             node.children[str(mat_child)] = Node(mat_child, parent=node, player=node.player * -1)
 
 
-
 # For the traverse function, to avoid using up too much time or resources, you may start considering only
 # a subset of children (e.g 5 children). Increase this number or by choosing this subset smartly later.
 #New implemenataion
@@ -79,10 +78,10 @@ def traverse(node):
             return pick_unvisited(node.parent.children)
         else:
             expand(node)
-            return pick_unvisited(node.children)or node
+            return pick_unvisited(node.children) or node
     else:
             expand(node)
-            return pick_unvisited(node.children)or node
+            return pick_unvisited(node.children) or node
 
 def pick_unvisited(nodes):
     unvisited_node = []
@@ -96,7 +95,6 @@ def pick_unvisited(nodes):
 
 def fully_expanded(node):
     return all([c.visited_number > 0 for c in node.children.values()])
-
 
 def visulize_tree(root):
     print("====================================")
@@ -141,11 +139,6 @@ def backpropagate(node, result):
     backpropagate(node.parent, result)
 
 
-
-
-
-
-
 def is_root(node):
     return True if node.parent == None else False
 
@@ -160,9 +153,6 @@ def update_stats(node, result):
     else:
         node.visited_number += 1
 
-
-#def best_child(node):
-#    return max(node.children.values(), key=lambda x: x.total_value)
 def best_child(node):
     for child in node.children.items():
         if check_for_win(child[1].state) == -1:
