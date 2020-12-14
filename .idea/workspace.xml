@@ -2,16 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdee1a99-c6ef-4068-bc75-bfa712a99f17" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/agent/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/agent/helper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/agent/mctsAgent.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/agent/mctsAgent_fast.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/agent/randomAgent.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/self_play.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCTS.py" beforeDir="false" afterPath="$PROJECT_DIR$/MCTS.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fiveinarow.py" beforeDir="false" afterPath="$PROJECT_DIR$/fiveinarow.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/play_with_human.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/encoder/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/encoder/base.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/encoder/oneplane.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agent/mctsAgent.py" beforeDir="false" afterPath="$PROJECT_DIR$/agent/mctsAgent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/play_with_human.py" beforeDir="false" afterPath="$PROJECT_DIR$/play_with_human.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/self_play.py" beforeDir="false" afterPath="$PROJECT_DIR$/self_play.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +109,7 @@
       <updated>1607425250375</updated>
       <workItem from="1607425251463" duration="5089000" />
       <workItem from="1607767472127" duration="1171000" />
-      <workItem from="1607770638180" duration="51035000" />
+      <workItem from="1607770638180" duration="55271000" />
     </task>
     <servers />
   </component>
@@ -124,26 +121,26 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="360" y="219" width="1071" height="778" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1607926201015" />
-    <state x="521" y="366" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607953944399">
+    <state x="521" y="366" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607965019730">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="521" y="366" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1792.1120@0.0.1792.1120" timestamp="1607953944398" />
-    <state width="1750" height="314" key="GridCell.Tab.0.bottom" timestamp="1607953786879">
+    <state x="521" y="366" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1792.1120@0.0.1792.1120" timestamp="1607965019730" />
+    <state width="1750" height="487" key="GridCell.Tab.0.bottom" timestamp="1607968289415">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="314" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1607953786879" />
-    <state width="1750" height="314" key="GridCell.Tab.0.center" timestamp="1607953786878">
+    <state width="1750" height="487" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1607968289415" />
+    <state width="1750" height="487" key="GridCell.Tab.0.center" timestamp="1607968289414">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="314" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1607953786878" />
-    <state width="1750" height="314" key="GridCell.Tab.0.left" timestamp="1607953786877">
+    <state width="1750" height="487" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1607968289414" />
+    <state width="1750" height="487" key="GridCell.Tab.0.left" timestamp="1607968289413">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="314" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1607953786877" />
-    <state width="1750" height="314" key="GridCell.Tab.0.right" timestamp="1607953786878">
+    <state width="1750" height="487" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1607968289413" />
+    <state width="1750" height="487" key="GridCell.Tab.0.right" timestamp="1607968289414">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="314" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1607953786878" />
+    <state width="1750" height="487" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1607968289414" />
     <state width="1750" height="392" key="GridCell.Tab.1.bottom" timestamp="1607948383236">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -166,7 +163,7 @@
     <state x="561" y="251" width="670" height="676" key="search.everywhere.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1607925787852" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Gomoku$self_play.coverage" NAME="self_play Coverage Results" MODIFIED="1607953786871" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Gomoku$self_play.coverage" NAME="self_play Coverage Results" MODIFIED="1607968289403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Gomoku$gomoku.coverage" NAME="play_with_human Coverage Results" MODIFIED="1607952448762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

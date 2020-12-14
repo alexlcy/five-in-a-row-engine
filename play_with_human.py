@@ -1,5 +1,5 @@
 import numpy as np
-import pygame
+#import pygame
 from fiveinarow import draw_board, render, check_for_done
 from agent import randomAgent, mctsAgent
 from MCTS import Node, update_root, monte_carlo_tree_search

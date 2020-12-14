@@ -107,7 +107,6 @@ class MCTSAgent(Agent):
                 best_move_mat = child.game_state
                 best_move = child.move
 
-        print("Simulation Number", simulation_num)
 
         return best_move_mat, best_move
 
