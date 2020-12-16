@@ -63,8 +63,8 @@ def self_play(M = 8):
             time_diff = time.time() - start_time
             print(f"Saving file for {len(master_move)} steps now. Time Spent :{time_diff}. Rate: {time_diff/len(master_move)}")
 
-            np.save(f"game_data/master_mat_{date_string}.npy", master_mat_save)
-            np.save(f"game_data/master_move_{date_string}.npy", master_move_save)
+            np.save(f"game_data/master_mat_rule_{date_string}.npy", master_mat_save)
+            np.save(f"game_data/master_move_rule_{date_string}.npy", master_move_save)
             file_length = len(master_move)
 
     #         if debug == True:
