@@ -5,7 +5,7 @@ import time
 from encoder.base import get_encoder_by_name
 from fiveinarow import check_for_done, draw_board, render, check_for_done
 
-SIMULATION_NUMBER = 10000
+SIMULATION_NUMBER = 15000
 TEMPERATURE = 0.5
 encoder = get_encoder_by_name('oneplane', 8)
 
@@ -57,7 +57,7 @@ def self_play(M = 8):
         print(f'Done for one game with {step_num} moves.Time Spent :{time_diff}.Rate: {time_diff/len(master_move)}')
         print(len(master_move))
 
-        if len(master_move) > file_length + 50:
+        if len(master_move) > file_length + 200:
             master_mat_save = np.array(master_mat)
             master_move_save = np.array(master_move)
             time_diff = time.time() - start_time

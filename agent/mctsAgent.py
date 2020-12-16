@@ -4,7 +4,7 @@ import time
 import random
 import math
 from MCTS import monte_carlo_tree_search, Node
-from agent.helper import unvisited_nodes
+from agent.helper import unvisited_nodes,find_children_priority
 from fiveinarow import check_for_win
 
 
@@ -28,7 +28,7 @@ class MCTSNode(object):
         if self.move == None:
             self.unvisited_nodes = [(i, j) for i in range(mat.shape[0]) for j in range(mat.shape[0]) if mat[i][j] == 0]
         else:
-            self.unvisited_nodes = unvisited_nodes(mat)
+            self.unvisited_nodes = find_children_priority(self.game_state, unvisited_nodes(mat), self.player)
         np.random.shuffle(self.unvisited_nodes)
 
     def expansion(self):
@@ -106,7 +106,6 @@ class MCTSAgent(Agent):
                 best_visit_num = child_visit_num
                 best_move_mat = child.game_state
                 best_move = child.move
-
 
         return best_move_mat, best_move
 
