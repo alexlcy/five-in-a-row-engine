@@ -29,7 +29,6 @@ class MCTSNode(object):
             self.unvisited_nodes = [(i, j) for i in range(mat.shape[0]) for j in range(mat.shape[0]) if mat[i][j] == 0]
         else:
             self.unvisited_nodes = find_children_priority(self.game_state, unvisited_nodes(mat), self.player)
-        np.random.shuffle(self.unvisited_nodes)
 
     def expansion(self):
         choice = self.unvisited_nodes.pop()
@@ -62,8 +61,7 @@ class MCTSAgent(Agent):
 
         root = MCTSNode(mat, self.cur_player, move=move)
         simulation_num = 0
-        for i in range(self.simulation_number):
-        #while time.time() - cur_time < 10:
+        while time.time() - cur_time < 10:
             node = root
 
             # Step 1: Selection

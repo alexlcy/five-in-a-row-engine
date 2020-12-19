@@ -1,7 +1,7 @@
 import numpy as np
 import pygame
 from fiveinarow import draw_board, render, check_for_done
-from agent import randomAgent, mctsAgent
+from agent import randomAgent, mctsAgent, deeplearningAgent
 from MCTS import Node, update_root, monte_carlo_tree_search
 from multiprocessing import Process
 import multiprocessing
@@ -16,8 +16,8 @@ def update_by_pc(mat, move):
         2D matrix representing the updated state of the game.
     """
     #bots = randomAgent.RandomAgent()
-
-    bots = mctsAgent.MCTSAgent(simulation_number=15000, temperature=0.5, cur_player=1)
+    #bots = mctsAgent.MCTSAgent(simulation_number=15000, temperature=0.5, cur_player=1)
+    bots = deeplearningAgent.DeepLearningAgent(cur_player=-1)
     mat, move = bots.select_move(mat, move)
     return mat
 
