@@ -136,7 +136,6 @@ class MCTSAgent(Agent):
             have_winner = None
         cur_player = node.player
 
-
         while have_winner is None and (not board_full):
             cur_player *= -1
             move = unvisited_node_list.pop()

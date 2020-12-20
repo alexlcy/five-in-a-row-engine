@@ -2,6 +2,7 @@ from agent.base import Agent
 from encoder.base import get_encoder_by_name
 import tensorflow as tf
 import numpy as np
+import datetime
 import h5py
 from tensorflow.keras.optimizers import SGD
 
@@ -69,19 +70,25 @@ class PolicyAgent(Agent):
 
         return mat, (i,j)
 
-    def train(self, experience, lr, clipnorm, batch_size):
-        self._model.compile(loss = 'categorical_crossentropy',optimizer=SGD(lr=lr, clipnorm=clipnorm))
+    def train(self, experience, lr=0.0000001, clipnorm=1.0, batch_size=512):
+        self._model.compile(loss='categorical_crossentropy',optimizer=SGD(lr=lr, clipnorm=clipnorm))
         target_vectors = prepare_experience_data(
             experience,
             self._encoder.board_width,
             self._encoder.board_height)
         self._model.fit(
-            experience.states, target_vectors,
+            experience.states,
+            target_vectors,
             batch_size=batch_size,
             epochs=1)
 
+
     def set_collector(self, collector):
         self.collector = collector
+
+    def save(self, path = "saved_model/"):
+        date_string = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+        self._model.save(path + "pg_model_" + date_string)
 
 
 
@@ -91,5 +98,11 @@ def prepare_experience_data(experience, board_width, board_height):
     for i in range(experience_size):
         action = experience.actions[i]
         reward = experience.rewards[i]
-        target_vectors[i][action] = reward
-    return target_vectors
+        action_pos = np.where(action == 1)
+        if np.sum(action) == 0:
+            continue
+        else:
+            target_vectors[i][(action_pos[0][0]*8) + action_pos[1][0]] = reward
+
+
+    return target_vectors.reshape(target_vectors.shape[0], 64)

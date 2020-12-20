@@ -2,18 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdee1a99-c6ef-4068-bc75-bfa712a99f17" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/agent/deeplearningAgent.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/agent/policyAgent.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/encoder/allpattern.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rl/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rl/experience.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/train_policygradient.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Untitled1-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Untitled1.ipynb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/agent/mctsAgent.py" beforeDir="false" afterPath="$PROJECT_DIR$/agent/mctsAgent.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nohup2.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/play_with_human.py" beforeDir="false" afterPath="$PROJECT_DIR$/play_with_human.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agent/policyAgent.py" beforeDir="false" afterPath="$PROJECT_DIR$/agent/policyAgent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model training.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/model training.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rl/experience.py" beforeDir="false" afterPath="$PROJECT_DIR$/rl/experience.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/self_play.py" beforeDir="false" afterPath="$PROJECT_DIR$/self_play.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,9 +45,9 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/game_data" />
       <recent name="$PROJECT_DIR$/experience_data" />
-      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/agent" />
     </key>
   </component>
@@ -80,7 +74,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="self_play" type="PythonConfigurationType" factoryName="Python">
+    <configuration name="self_play" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="five-in-a-row-engine" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -102,7 +96,30 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="train_pg" type="PythonConfigurationType" factoryName="Python">
+      <module name="five-in-a-row-engine" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/local/bin/python3.7" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train_policygradient.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Python.train_pg" />
       <item itemvalue="Python.self_play" />
       <item itemvalue="Python.play_with_human" />
     </list>
@@ -118,7 +135,7 @@
       <workItem from="1607425251463" duration="5089000" />
       <workItem from="1607767472127" duration="1171000" />
       <workItem from="1607770638180" duration="66430000" />
-      <workItem from="1608279628758" duration="22225000" />
+      <workItem from="1608279628758" duration="28858000" />
     </task>
     <servers />
   </component>
@@ -126,30 +143,30 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="360" y="219" width="1071" height="778" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607926201015">
+    <state x="360" y="219" width="1071" height="826" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608402090671">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="360" y="219" width="1071" height="778" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1607926201015" />
+    <state x="360" y="219" width="1071" height="826" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1608402090671" />
     <state x="521" y="366" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607965019730">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="521" y="366" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1792.1120@0.0.1792.1120" timestamp="1607965019730" />
-    <state width="1750" height="285" key="GridCell.Tab.0.bottom" timestamp="1608394022218">
+    <state width="1750" height="285" key="GridCell.Tab.0.bottom" timestamp="1608456124183">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="285" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1608394022218" />
-    <state width="1750" height="285" key="GridCell.Tab.0.center" timestamp="1608394022218">
+    <state width="1750" height="285" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1608456124183" />
+    <state width="1750" height="285" key="GridCell.Tab.0.center" timestamp="1608456124181">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="285" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1608394022218" />
-    <state width="1750" height="285" key="GridCell.Tab.0.left" timestamp="1608394022217">
+    <state width="1750" height="285" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1608456124181" />
+    <state width="1750" height="285" key="GridCell.Tab.0.left" timestamp="1608456124180">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="285" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1608394022217" />
-    <state width="1750" height="285" key="GridCell.Tab.0.right" timestamp="1608394022218">
+    <state width="1750" height="285" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1608456124180" />
+    <state width="1750" height="285" key="GridCell.Tab.0.right" timestamp="1608456124182">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="285" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1608394022218" />
+    <state width="1750" height="285" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1608456124182" />
     <state width="1750" height="392" key="GridCell.Tab.1.bottom" timestamp="1608385284729">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -166,14 +183,14 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="1750" height="392" key="GridCell.Tab.1.right/0.0.1792.1120@0.0.1792.1120" timestamp="1608385284728" />
-    <state x="561" y="251" width="670" height="676" key="search.everywhere.popup" timestamp="1608360187367">
+    <state x="561" y="251" width="670" height="676" key="search.everywhere.popup" timestamp="1608400437517">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="561" y="251" width="670" height="676" key="search.everywhere.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1608360187367" />
+    <state x="561" y="251" width="670" height="676" key="search.everywhere.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1608400437517" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Gomoku$play_with_human.coverage" NAME="play_with_human Coverage Results" MODIFIED="1608363272048" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Gomoku$self_play.coverage" NAME="self_play Coverage Results" MODIFIED="1608394022204" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Gomoku$self_play.coverage" NAME="self_play Coverage Results" MODIFIED="1608454808536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Gomoku$gomoku.coverage" NAME="play_with_human Coverage Results" MODIFIED="1608269047110" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

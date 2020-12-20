@@ -42,13 +42,14 @@ class SimulationEngine:
 
         pygame.quit()
 
-    def self_play_monte_carlo(self, encoder, saving_perod = 200, file_path = 'game_data/'):
+    def self_play_monte_carlo(self, encoder, saving_perod = 50, file_path = 'game_data/'):
         print("self play started")
         date_string = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
         start_time = time.time()
         file_length = 0
         master_mat = []
         master_move = []
+        master_result = []
 
         while True:
             step_num = 0
@@ -67,7 +68,8 @@ class SimulationEngine:
                 # Saving the move information
                 master_move.append(encoder.encode_point(cur_move))
                 cur_player *= -1
-                step_num +=1
+                step_num += 1
+            master_result += [check_for_done(mat)[1] for _ in range(step_num)]
 
             time_diff = time.time() - start_time
             print(f'Done for one game with {step_num} moves.Time Spent :{time_diff}.Rate: {time_diff/len(master_move)}')
@@ -75,11 +77,18 @@ class SimulationEngine:
             if len(master_move) > file_length + saving_perod:
                 master_mat_save = np.array(master_mat)
                 master_move_save = np.array(master_move)
+                master_result_save = np.array(master_result)
                 time_diff = time.time() - start_time
                 print(f"Saving file for {len(master_move)} steps now. Time Spent :{time_diff}. Rate: {time_diff/len(master_move)}")
 
+
+                print(master_mat_save.shape)
+                print(master_move_save.shape)
+                print(master_result_save.shape)
+
                 np.save(file_path + f"master_mat_rule_{date_string}.npy", master_mat_save)
                 np.save(file_path + f"master_move_rule_{date_string}.npy", master_move_save)
+                np.save(file_path + f"master_result_rule_{date_string}.npy", master_result_save)
                 file_length = len(master_move)
 
     def simulate_game(self):
@@ -95,6 +104,7 @@ class SimulationEngine:
 
     def self_play_RL(self, num_games, file_path = "experience_data"):
         time_start = time.time()
+        white_win = 0
 
         collector1 = ExperienceCollector()
         collector2 = ExperienceCollector()
@@ -111,6 +121,7 @@ class SimulationEngine:
             if winner == 1:
                 collector1.complete_episode(reward=1)
                 collector2.complete_episode(reward=-1)
+                white_win +=1
             elif winner == -1:
                 collector2.complete_episode(reward=1)
                 collector1.complete_episode(reward=-1)
@@ -126,23 +137,26 @@ class SimulationEngine:
 
         time_spent = time.time()-time_start
         print(f"Completed self play for {num_games} game. Total time: {time_spent}. Rate {time_spent/num_games}")
+        print(f"White win num:{white_win}; Black win num: {num_games-white_win}")
 
 
 if __name__ == "__main__":
     model = tf.keras.models.load_model('saved_model/allpattern_model')
     encoder = get_encoder_by_name('allpattern', (8,8))
-    bot_white = PolicyAgent(model, encoder, 1)
-    bot_black = PolicyAgent(model, encoder, -1)
+    # bot_white = PolicyAgent(model, encoder, 1)
+    # bot_black = PolicyAgent(model, encoder, -1)
 
-    # SIMULATION_NUMBER = 15000
-    # TEMPERATURE = 0.5
-    # encoder = get_encoder_by_name('oneplane', 8)
-    # bot_white = MCTSAgent(simulation_number=SIMULATION_NUMBER,
-    #                       temperature=TEMPERATURE,
-    #                       cur_player=1)
-    # bot_black = MCTSAgent(simulation_number=SIMULATION_NUMBER,
-    #                       temperature=TEMPERATURE,
-    #                       cur_player=-1)
-
+    SIMULATION_NUMBER = 15000
+    TEMPERATURE = 0.5
+    encoder = get_encoder_by_name('oneplane', 8)
+    bot_white = MCTSAgent(simulation_number=SIMULATION_NUMBER,
+                          temperature=TEMPERATURE,
+                          cur_player=1)
+    bot_black = MCTSAgent(simulation_number=SIMULATION_NUMBER,
+                          temperature=TEMPERATURE,
+                          cur_player=-1)
     simulation = SimulationEngine(bot_white, bot_black)
-    simulation.self_play_RL(500)
+    simulation.self_play_monte_carlo(encoder)
+
+    # simulation = SimulationEngine(bot_white, bot_black)
+    # simulation.self_play_RL(20000)

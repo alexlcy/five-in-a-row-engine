@@ -59,3 +59,9 @@ def combine_experience(collectors):
         combined_states,
         combined_actions,
         combined_rewards)
+
+def load_experience(h5file):
+    return ExperienceBuffer(
+        states=np.array(h5file['experience']['states']),
+        actions=np.array(h5file['experience']['actions']),
+        rewards=np.array(h5file['experience']['rewards']))
