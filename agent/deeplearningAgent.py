@@ -3,17 +3,16 @@ from encoder.base import get_encoder_by_name
 import tensorflow as tf
 import numpy as np
 
-encoder = get_encoder_by_name('allpattern', 8)
+encoder = get_encoder_by_name('layer_20_encoder', 8)
 
 class DeepLearningAgent(Agent):
     def __init__(self, cur_player):
         Agent.__init__(self)
         self.cur_player = cur_player
-        self.model = model_loaded = tf.keras.models.load_model('saved_model/allpattern_model')
+        self.model = tf.keras.models.load_model('saved_model/pg_model_V1_panelize_draw')
 
     def select_move(self, mat, move):
         X_input = encoder.encode(mat, self.cur_player, move)
-
         position_priority = list(np.argsort(self.model.predict(X_input))[0][::-1])
         for position in position_priority:
             i = position // 8

@@ -60,8 +60,8 @@ class MCTSAgent(Agent):
         cur_time = time.time()
 
         root = MCTSNode(mat, self.cur_player, move=move)
-        simulation_num = 0
-        while time.time() - cur_time < 10:
+        for i in range(self.simulation_num):
+        #while time.time() - cur_time < 10:
             node = root
 
             # Step 1: Selection
@@ -83,8 +83,6 @@ class MCTSAgent(Agent):
                     node.win_num += 0.5
                 node.visit_num += 1
                 node = node.parent
-
-            simulation_num +=1
 
         visited_num_mat = np.zeros((8,8))
         winning_num_mat = np.zeros((8,8))

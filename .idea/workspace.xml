@@ -2,13 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdee1a99-c6ef-4068-bc75-bfa712a99f17" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/train_policygradient.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/agent/actorCriticAgent.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/agent/alphaGomokuAgent.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/encoder/layer_20_encoder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agent/deeplearningAgent.py" beforeDir="false" afterPath="$PROJECT_DIR$/agent/deeplearningAgent.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/agent/mctsAgent.py" beforeDir="false" afterPath="$PROJECT_DIR$/agent/mctsAgent.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/agent/policyAgent.py" beforeDir="false" afterPath="$PROJECT_DIR$/agent/policyAgent.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model training.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/model training.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/play_with_human.py" beforeDir="false" afterPath="$PROJECT_DIR$/play_with_human.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rl/experience.py" beforeDir="false" afterPath="$PROJECT_DIR$/rl/experience.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/self_play.py" beforeDir="false" afterPath="$PROJECT_DIR$/self_play.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train_policygradient.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_policygradient.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,9 +51,10 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/experience_data" />
+      <recent name="$PROJECT_DIR$/saved_model" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/game_data" />
-      <recent name="$PROJECT_DIR$/experience_data" />
       <recent name="$PROJECT_DIR$/agent" />
     </key>
   </component>
@@ -135,7 +142,8 @@
       <workItem from="1607425251463" duration="5089000" />
       <workItem from="1607767472127" duration="1171000" />
       <workItem from="1607770638180" duration="66430000" />
-      <workItem from="1608279628758" duration="28858000" />
+      <workItem from="1608279628758" duration="31409000" />
+      <workItem from="1608556313588" duration="50121000" />
     </task>
     <servers />
   </component>
@@ -147,50 +155,51 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="360" y="219" width="1071" height="826" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1608402090671" />
-    <state x="521" y="366" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607965019730">
+    <state x="521" y="366" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1608741892621">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="521" y="366" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1792.1120@0.0.1792.1120" timestamp="1607965019730" />
-    <state width="1750" height="285" key="GridCell.Tab.0.bottom" timestamp="1608456124183">
+    <state x="521" y="366" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1792.1120@0.0.1792.1120" timestamp="1608741892621" />
+    <state width="1750" height="377" key="GridCell.Tab.0.bottom" timestamp="1608742022953">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="285" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1608456124183" />
-    <state width="1750" height="285" key="GridCell.Tab.0.center" timestamp="1608456124181">
+    <state width="1750" height="377" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1608742022953" />
+    <state width="1750" height="377" key="GridCell.Tab.0.center" timestamp="1608742022953">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="285" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1608456124181" />
-    <state width="1750" height="285" key="GridCell.Tab.0.left" timestamp="1608456124180">
+    <state width="1750" height="377" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1608742022953" />
+    <state width="1750" height="377" key="GridCell.Tab.0.left" timestamp="1608742022952">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="285" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1608456124180" />
-    <state width="1750" height="285" key="GridCell.Tab.0.right" timestamp="1608456124182">
+    <state width="1750" height="377" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1608742022952" />
+    <state width="1750" height="377" key="GridCell.Tab.0.right" timestamp="1608742022953">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="285" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1608456124182" />
-    <state width="1750" height="392" key="GridCell.Tab.1.bottom" timestamp="1608385284729">
+    <state width="1750" height="377" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1608742022953" />
+    <state width="1750" height="392" key="GridCell.Tab.1.bottom" timestamp="1608652649083">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="392" key="GridCell.Tab.1.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1608385284729" />
-    <state width="1750" height="392" key="GridCell.Tab.1.center" timestamp="1608385284728">
+    <state width="1750" height="392" key="GridCell.Tab.1.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1608652649083" />
+    <state width="1750" height="392" key="GridCell.Tab.1.center" timestamp="1608652649082">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="392" key="GridCell.Tab.1.center/0.0.1792.1120@0.0.1792.1120" timestamp="1608385284728" />
-    <state width="1750" height="392" key="GridCell.Tab.1.left" timestamp="1608385284727">
+    <state width="1750" height="392" key="GridCell.Tab.1.center/0.0.1792.1120@0.0.1792.1120" timestamp="1608652649082" />
+    <state width="1750" height="392" key="GridCell.Tab.1.left" timestamp="1608652649082">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="392" key="GridCell.Tab.1.left/0.0.1792.1120@0.0.1792.1120" timestamp="1608385284727" />
-    <state width="1750" height="392" key="GridCell.Tab.1.right" timestamp="1608385284728">
+    <state width="1750" height="392" key="GridCell.Tab.1.left/0.0.1792.1120@0.0.1792.1120" timestamp="1608652649082" />
+    <state width="1750" height="392" key="GridCell.Tab.1.right" timestamp="1608652649083">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="392" key="GridCell.Tab.1.right/0.0.1792.1120@0.0.1792.1120" timestamp="1608385284728" />
-    <state x="561" y="251" width="670" height="676" key="search.everywhere.popup" timestamp="1608400437517">
+    <state width="1750" height="392" key="GridCell.Tab.1.right/0.0.1792.1120@0.0.1792.1120" timestamp="1608652649083" />
+    <state x="561" y="251" width="670" height="676" key="search.everywhere.popup" timestamp="1608635869497">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="561" y="251" width="670" height="676" key="search.everywhere.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1608400437517" />
+    <state x="561" y="251" width="670" height="676" key="search.everywhere.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1608635869497" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Gomoku$play_with_human.coverage" NAME="play_with_human Coverage Results" MODIFIED="1608363272048" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Gomoku$self_play.coverage" NAME="self_play Coverage Results" MODIFIED="1608454808536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Gomoku$play_with_human.coverage" NAME="play_with_human Coverage Results" MODIFIED="1608738316885" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Gomoku$self_play.coverage" NAME="self_play Coverage Results" MODIFIED="1608741690975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Gomoku$gomoku.coverage" NAME="play_with_human Coverage Results" MODIFIED="1608269047110" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Gomoku$train_pg.coverage" NAME="train_pg Coverage Results" MODIFIED="1608614183038" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
   </component>
 </project>

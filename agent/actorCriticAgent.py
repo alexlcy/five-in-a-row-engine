@@ -7,13 +7,13 @@ import h5py
 from tensorflow.keras.optimizers import SGD
 
 
-class PolicyAgent(Agent):
+
+class ActorCriticAgent(Agent):
     def __init__(self,model,encoder, cur_player):
         Agent.__init__(self)
         self._model = model
         self._encoder = encoder
         self.cur_player = cur_player
-        self.collector = None
 
     def serialize(self, h5file):
         h5file.create_group('encoder')
@@ -23,25 +23,29 @@ class PolicyAgent(Agent):
         h5file.create_group('model')
         self._model.save(h5file)
 
-    def load_policy_agent(h5file, cur_player):
+    def load_actor_critic_agent(h5file, cur_player):
         model = tf.keras.models.load_model(h5file['model'])
         encoder_name = h5file['encoder'].attrs['name']
         board_width = h5file['encoder'].attrs['board_width']
         board_height = h5file['encoder'].attrs['board_height']
         encoder = get_encoder_by_name(encoder_name,(board_width, board_height))
-        return PolicyAgent(model, encoder, cur_player)
+        return ActorCriticAgent(model, encoder, cur_player)
 
     def clip_probs(self, original_probs):
-        min_p = 1e-5
+        min_p = 0.01
         max_p = 1 - min_p
         clipped_probs = np.clip(original_probs, min_p, max_p)
         clipped_probs = clipped_probs / np.sum(clipped_probs)
         return clipped_probs
 
     def select_move(self, mat, move):
-        X_input_np = self._encoder.encode(mat, self.cur_player, move)
-        X_input = tf.convert_to_tensor(X_input_np)
-        move_probs = self._model.predict(X_input)
+        X_input = self._encoder.encode(mat, self.cur_player, move)
+        X_input = tf.convert_to_tensor(X_input)
+        move_probs, values = self._model.predict(X_input)
+        print(mat)
+        print(values)
+        estimated_value = values[0]
+
         move_probs = self.clip_probs(move_probs)
         num_moves = 8*8
         candidates = np.arange(num_moves)
@@ -49,7 +53,6 @@ class PolicyAgent(Agent):
                                         num_moves,
                                         replace=False,
                                         p=move_probs[0])
-
         for position in ranked_moves:
             i = position // 8
             j = position % 8
@@ -60,41 +63,53 @@ class PolicyAgent(Agent):
             temp_mat = np.zeros((8,8))
             if move is not None:
                 temp_mat[move[0]][move[1]] = 1
+
             self.collector.record_decision(
-                    raw_state=np.copy(mat),
-                    state=X_input_np,
-                    action=temp_mat
+                    raw_state=mat,
+                    state=X_input,
+                    action=temp_mat,
+                    estimated_value=estimated_value
             )
 
         mat[i][j] = self.cur_player
 
         return mat, (i,j)
 
-    def train(self, experience, lr=0.0000001, clipnorm=1.0, batch_size=1024):
-        self._model.compile(loss='categorical_crossentropy',optimizer=SGD(lr=lr, clipnorm=clipnorm))
+    def train(self, experience, lr=0.0000001, batch_size=512):
+        self._model.model.compile(loss = ['categorical_crossentropy', 'mse'],
+                                  optimizer='adam',
+                                  loss_weights=[1.0, 0.5])
 
-        target_vectors = prepare_experience_data(
-            experience,
-            self._encoder.board_width,
-            self._encoder.board_height)
+        n = experience.states.shape[0]
+        num_moves = self.encoder.num_points()
 
+        # Prepare the raw dataset
         feature_vector = np.squeeze(experience.states, axis=1)
+        policy_target = np.zeros((n, num_moves))
+        value_target = np.zeros((n,))
 
-        self._model.fit(
+        for i in range(n):
+            # Collect policy target of that round (Action position = estimated value of board [Advantage])
+            action = experience.actions[i]
+            action_pos = np.where(action == 1)
+            policy_target[i][(action_pos[0][0] * 8) + action_pos[1][0]] = experience.advantages[i]
+
+            # Collect reward info of the round (Actual win or loss in the round)
+            reward = experience.rewards[i]
+            value_target[i] = reward
+
+        self.model.fit(
             feature_vector,
-            target_vectors,
+            [policy_target, value_target],
             batch_size=batch_size,
             epochs=1)
-
 
     def set_collector(self, collector):
         self.collector = collector
 
-    def save(self, version, path = "saved_model/"):
+    def save(self, path = "saved_model/"):
         date_string = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-        self._model.save(path + f"pg_model_V{version}")
-
-
+        self._model.save(path + "pg_model_actorcritic_" + date_string)
 
 def prepare_experience_data(experience, board_width, board_height):
     experience_size = experience.actions.shape[0]
