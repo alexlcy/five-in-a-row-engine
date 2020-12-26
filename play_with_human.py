@@ -24,9 +24,8 @@ def update_by_pc(mat, move):
     # bots = deeplearningAgent.DeepLearningAgent(cur_player=-1)
 
     deep_policy_net = tf.keras.models.load_model('saved_model/layer_20_model')
-    value_net = tf.keras.models.load_model('saved_model/alpha_gomuku_value_net_no_draw')
+    value_net = tf.keras.models.load_model('saved_model/alpha_gomuku_value_net')
     rollout_model = tf.keras.models.load_model('saved_model/allpattern_model')
-
     bots = alphaGomokuAgent.AlphaGomokuAgent(deep_policy_net, value_net, rollout_model, simulation_number=500,cur_player=-1)
     mat, move = bots.select_move(mat, move)
 

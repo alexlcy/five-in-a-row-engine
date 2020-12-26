@@ -35,8 +35,8 @@ def train_model():
     parser = argparse.ArgumentParser()
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--lr', type=float, default=0.0001)
-    parser.add_argument('--bs', type=int, default=512)
+    parser.add_argument('--lr', type=float, default=0.00015)
+    parser.add_argument('--bs', type=int, default=2048)
     parser.add_argument('--experience_dir',  default="experience_data/")
 
     args = parser.parse_args()
@@ -52,8 +52,7 @@ def train_model():
         exp_buffer = load_experience(h5py.File(exp_filename))
         learning_agent.train(exp_buffer, lr=args.lr, batch_size=args.bs)
 
-    learning_agent.save(version="1_panelize_draw")
-
+    learning_agent.save(version="2_00015_rate")
 
 if __name__ == '__main__':
     train_model()

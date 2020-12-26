@@ -9,7 +9,7 @@ class DeepLearningAgent(Agent):
     def __init__(self, cur_player):
         Agent.__init__(self)
         self.cur_player = cur_player
-        self.model = tf.keras.models.load_model('saved_model/pg_model_V1_panelize_draw')
+        self.model = tf.keras.models.load_model('saved_model/pg_model_V2_have_draw')
 
     def select_move(self, mat, move):
         X_input = encoder.encode(mat, self.cur_player, move)

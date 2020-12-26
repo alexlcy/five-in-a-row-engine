@@ -4,6 +4,7 @@ from agent.policyAgent import PolicyAgent
 
 import datetime
 import h5py
+from scipy.stats import binom_test
 import tensorflow as tf
 from rl.experience import ExperienceCollector, combine_experience
 import time
@@ -99,6 +100,7 @@ class SimulationEngine:
         time_start = time.time()
         white_win = 0
         draw = 0
+        cur_player = 1
 
         collector1 = ExperienceCollector()
         collector2 = ExperienceCollector()
@@ -106,22 +108,29 @@ class SimulationEngine:
         self.bot_1.set_collector(collector1)
         self.bot_2.set_collector(collector2)
 
+        self.bot_1.set_temperature(0.005)
+        self.bot_2.set_temperature(0.005)
+
 
         for i in range(num_games):
             collector1.begin_episode()
             collector2.begin_episode()
 
-            winner = self.simulate_game()
+            winner = self.simulate_game(cur_player=cur_player)
+
             if winner == 1:
                 collector1.complete_episode(reward=1)
                 collector2.complete_episode(reward=-1)
                 white_win += 1
             elif winner == -1:
-                collector2.complete_episode(reward=1)
                 collector1.complete_episode(reward=-1)
+                collector2.complete_episode(reward=1)
             else:
-                collector1.complete_episode(reward=-0.2)
-                collector2.complete_episode(reward=-0.2)
+                collector1.complete_episode(reward=0)
+                collector2.complete_episode(reward=0)
+                draw +=1
+
+            cur_player *= -1
 
         experience = combine_experience([collector1,collector2])
 
@@ -133,6 +142,19 @@ class SimulationEngine:
         print(f"Completed self play for {num_games} game. Total time: {time_spent}. Rate {time_spent/num_games}")
         print(f"White win num:{white_win}; Black win num: {num_games-white_win-draw}")
 
+
+    def simulate_game(self, cur_player=1):
+        game_state = np.zeros((self.M, self.M))
+        cur_move = None
+
+        while check_for_done(game_state)[0] is False:
+            game_state, cur_move = self.player_bot_dict[cur_player].select_move(game_state, cur_move)
+            cur_player *= -1
+
+        print("Done for one game")
+        return check_for_done(game_state)[1]
+
+
     def test_RL_Agents(self, num_games):
         time_start = time.time()
         wins = 0
@@ -141,7 +163,6 @@ class SimulationEngine:
         start_player = 1
         while wins + losses < num_games:
             winner = self.simulate_game(cur_player=start_player)
-            print("Done for one game")
             start_player *= -1
             if winner == 1:
                 wins += 1
@@ -157,58 +178,20 @@ class SimulationEngine:
         print('Total Losses: %d' % (losses))
         print(f'Total Win percentage: {wins/(wins+losses)}')
         print(f"Total time: {time_spent}")
-
-
-    def simulate_game(self, cur_player=1):
-        game_state = np.zeros((self.M, self.M))
-        cur_move = None
-
-        while check_for_done(game_state)[0] is False:
-            game_state, cur_move = self.player_bot_dict[cur_player].select_move(game_state, cur_move)
-            cur_player *= -1
-        print("Done for one game")
-        return check_for_done(game_state)[1]
-
-
-    def test_RL_Agents(self, num_games):
-        time_start = time.time()
-        wins = 0
-        losses = 0
-        draws = 0
-        start_player = 1
-        while wins + losses < num_games:
-            winner = self.simulate_game(cur_player=start_player)
-            print("Done for one game")
-            start_player *= -1
-            if winner == 1:
-                wins += 1
-            elif winner == -1:
-                losses += 1
-            else:
-                draws +=1
-
-        time_spent = time.time() - time_start
-        print('Agent 1 (Testing Agent)')
-        print('Total Win: %d' % (wins))
-        print('Total Draws: %d' % (draws))
-        print('Total Losses: %d' % (losses))
-        print(f'Total Win percentage: {wins/(wins+losses)}')
-        print(f"Total time: {time_spent}")
-
-
-    def simulate_game(self, cur_player=1):
-        game_state = np.zeros((self.M, self.M))
-        cur_move = None
-
-        while check_for_done(game_state)[0] is False:
-            game_state, cur_move = self.player_bot_dict[cur_player].select_move(game_state, cur_move)
-            cur_player *= -1
-        print("Done for one game")
-        return check_for_done(game_state)[1]
+        print(f"p value {binom_test(wins, wins+losses, 0.5)}")
 
 if __name__ == "__main__":
 
-    """Reinforcement leanring self play"""
+    """Reinforcement learning self play"""
+    # model = tf.keras.models.load_model('saved_model/layer_20_model')
+    # encoder = get_encoder_by_name('layer_20_encoder', (8,8))
+    # bot_white = PolicyAgent(model, encoder, 1)
+    # bot_black = PolicyAgent(model, encoder, -1)
+    # bot_black.set_temperature(0.005)
+    # bot_white.set_temperature(0.005)
+    # simulation = SimulationEngine(bot_white, bot_black)
+    # simulation.self_play_RL(num_games=2000)
+
     # model = tf.keras.models.load_model('saved_model/actor_critic_net')
     # encoder = get_encoder_by_name('layer_20_encoder', (8,8))
     # bot_white = ActorCriticAgent(model, encoder, 1)
@@ -233,15 +216,6 @@ if __name__ == "__main__":
     # for worker in workers:
     #     worker.join()
 
-    model = tf.keras.models.load_model('saved_model/layer_20_model')
-    encoder = get_encoder_by_name('layer_20_encoder', (8,8))
-    bot_white = PolicyAgent(model, encoder, 1)
-    bot_black = PolicyAgent(model, encoder, -1)
-    simulation = SimulationEngine(bot_white, bot_black)
-    simulation.self_play_RL(num_games=10)
-
-
-
 
 
     """Monte Carlo Geneerate Data"""
@@ -257,13 +231,16 @@ if __name__ == "__main__":
     # simulation = SimulationEngine(bot_white, bot_black)
     # simulation.self_play_monte_carlo(encoder)
 
-    """Agent self play"""
-    model = tf.keras.models.load_model('saved_model/layer_20_model')
+    # """Agent self play"""
+    model = tf.keras.models.load_model('saved_model/pg_model_V2_00002_rate')
     encoder = get_encoder_by_name('layer_20_encoder', (8,8))
     bot_white = PolicyAgent(model, encoder, 1)
 
-    model = tf.keras.models.load_model('saved_model/pg_model_V1_panelize_draw')
+    model = tf.keras.models.load_model('saved_model/layer_20_model')
     bot_black = PolicyAgent(model, encoder, -1)
-    simulation = SimulationEngine(bot_white, bot_black)
-    simulation.test_RL_Agents(50)
 
+    bot_black.set_temperature(0)
+    bot_white.set_temperature(0)
+
+    simulation = SimulationEngine(bot_white, bot_black)
+    simulation.test_RL_Agents(100)

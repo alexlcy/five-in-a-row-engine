@@ -1,5 +1,6 @@
 from encoder.base import Encoder
 import numpy as np
+from numba import jit
 
 class Layer20Encoder(Encoder):
     def __init__(self, board_size):
@@ -10,6 +11,10 @@ class Layer20Encoder(Encoder):
         return self.board_width * self.board_height
 
     def encode(self, mat, cur_player, last_move):
+        """
+        Encode the board as model input
+        """
+
         # Flip the sign of the mat if the previous player is -1 (Current player is 1)
         if cur_player == -1:
             mat = np.negative(mat)
@@ -35,7 +40,13 @@ class Layer20Encoder(Encoder):
 def create(board_size):
     return Layer20Encoder(board_size)
 
+@jit()
 def potential_open_moves(game_state):
+    """
+    Getting the move that can stop a open four/three/two/one
+    E.g. If there are open four in the board, two ends of the open four will be labeled as 1.
+    """
+
     mat = np.copy(game_state)
 
     master_X_open_self = []
@@ -140,7 +151,7 @@ def potential_open_moves(game_state):
         master_X_open_oppo.append(np.copy(X_open_oppo))
     return master_X_open_self + master_X_open_oppo
 
-
+@jit()
 def break_down_layers(game_state):
     mat = np.copy(game_state)
 
