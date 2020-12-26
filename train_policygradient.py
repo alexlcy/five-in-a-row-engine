@@ -45,7 +45,7 @@ def train_model():
     encoder = get_encoder_by_name('layer_20_encoder', (8, 8))
     learning_agent = PolicyAgent(model, encoder, 1)
 
-    experience_list = os.listdir(args.experience_dir)
+    experience_list = [file for file in os.listdir(args.experience_dir) if not file.startsswith("experiment")]
 
     for exp_filename in [args.experience_dir + file for file in experience_list]:
         print('Training with %s...' % exp_filename)

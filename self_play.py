@@ -232,11 +232,12 @@ if __name__ == "__main__":
     # simulation.self_play_monte_carlo(encoder)
 
     # """Agent self play"""
-    model = tf.keras.models.load_model('saved_model/pg_model_V2_00002_rate')
+    model = tf.keras.models.load_model('saved_model/layer_20_model')
     encoder = get_encoder_by_name('layer_20_encoder', (8,8))
     bot_white = PolicyAgent(model, encoder, 1)
 
-    model = tf.keras.models.load_model('saved_model/layer_20_model')
+
+    model = tf.keras.models.load_model('saved_model/pg_model_V2_00002_rate')
     bot_black = PolicyAgent(model, encoder, -1)
 
     bot_black.set_temperature(0)
